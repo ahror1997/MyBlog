@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MyBlog.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyBlog
 {
@@ -23,7 +20,15 @@ namespace MyBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // database connection
+            string mySqlConnectionStr = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContextPool<ApplicationContext>(options => options.UseMySql(mySqlConnectionStr,
+                ServerVersion.AutoDetect(mySqlConnectionStr)));
+
             services.AddControllersWithViews();
+
+            // makes routes lowercase
+            services.AddRouting(options => options.LowercaseUrls = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
