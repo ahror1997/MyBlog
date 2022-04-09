@@ -1,0 +1,92 @@
+﻿@model MyBlog.Models.User
+@{
+    Layout = "Admin_Layout";
+    ViewData["Title"] = "User Create";
+}
+
+<aside class="right-side">
+    <section class="content-header">
+        <h1>Dashboard</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item pt-1">
+                <a href="#"><i class="fa fa-fw fa-home"></i> Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-action="Index" asp-controller="User">Users</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Create
+            </li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title d-inline">
+                            <i class="fa fa-fw fa-crosshairs"></i> New User
+                        </h3>
+                        <span class="pull-right">
+                            <i class="fa fa-fw fa-chevron-up clickable"></i>
+                            <i class="fa fa-fw fa-times removepanel"></i>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <form role="form" asp-action="Create" asp-controller="User" method="post">
+                            <div class="form-group">
+                                <label asp-for="Surname">Surname:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Surname" type="text" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name">Name:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Name" type="text" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Patronymic">Patronymic:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Patronymic" type="text" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email">Email:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Email" type="email" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone">Phone:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Phone" type="tel" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Login">Login:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Login" type="text" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password">Password:</label>
+                                <div class="col-lg-10 col-md-10  col-sm-12 col-12 col-sm-12">
+                                    <input asp-for="Password" type="password" class="form-control form-control-lg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-labeled btn-success mb-3">
+                                    <span class="btn-label">
+                                        <i class="fa fa-check"></i>
+                                    </span> Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</aside>

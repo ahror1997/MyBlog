@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Admin\Article\" />
-    <Folder Include="Views\Admin\User\" />
     <Folder Include="Views\API\" />
     <Folder Include="wwwroot\admin\" />
   </ItemGroup>
