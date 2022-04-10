@@ -8,8 +8,8 @@ using MyBlog.Models;
 namespace MyBlog.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220408084518_initial_create")]
-    partial class initial_create
+    [Migration("20220410114723_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,9 @@ namespace MyBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .HasColumnType("longtext");
 
@@ -31,6 +34,8 @@ namespace MyBlog.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Articles");
                 });
@@ -79,6 +84,22 @@ namespace MyBlog.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("MyBlog.Models.Article", b =>
+                {
+                    b.HasOne("MyBlog.Models.Category", "Category")
+                        .WithMany("Articles")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MyBlog.Models.Category", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

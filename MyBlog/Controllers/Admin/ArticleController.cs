@@ -26,6 +26,7 @@ namespace MyBlog.Controllers.Admin
         [Route("[action]")]
         public IActionResult Create()
         {
+            ViewBag.Categories = context.Categories.ToList();
             return View("Views/Admin/Article/Create.cshtml");
         }
 
@@ -42,6 +43,7 @@ namespace MyBlog.Controllers.Admin
         [Route("[action]/{Id}")]
         public IActionResult Edit(int Id)
         {
+            ViewBag.Categories = context.Categories.ToList();
             var article = context.Articles.Find(Id);
             return View("Views/Admin/Article/Edit.cshtml", article);
         }
