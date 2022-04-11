@@ -1,4 +1,6 @@
-﻿namespace MyBlog.Models
+﻿using Newtonsoft.Json;
+
+namespace MyBlog.Models
 {
     public class User
     {
@@ -16,6 +18,7 @@
 
         public string Login { get; set; }
 
+        [JsonIgnore]
         public string Password { get; set; }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace MyBlog.Models
 {
@@ -13,8 +10,10 @@ namespace MyBlog.Models
 
         public string Content { get; set; }
 
+        [JsonProperty(PropertyName = "category_id")]
         public int CategoryId { get; set; }
 
+        [JsonIgnore]
         public Category Category { get; set; }
     }
 }

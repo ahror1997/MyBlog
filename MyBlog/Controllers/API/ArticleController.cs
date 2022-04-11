@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
@@ -9,48 +11,48 @@ namespace MyBlog.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class ArticleController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public CategoryController(ApplicationContext context)
+        public ArticleController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/category
+        // GET: api/Article
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
         {
-            return await _context.Categories.Include(a => a.Articles).Where(x => x.Title != "tets").ToListAsync();
+            return await _context.Articles.ToListAsync();
         }
 
-        // GET: api/category/5
+        // GET: api/Article/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<Article>> GetArticle(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var article = await _context.Articles.FindAsync(id);
 
-            if (category == null)
+            if (article == null)
             {
                 return NotFound();
             }
 
-            return category;
+            return article;
         }
 
-        // PUT: api/category/5
+        // PUT: api/Article/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutArticle(int id, Article article)
         {
-            if (id != category.Id)
+            if (id != article.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
+            _context.Entry(article).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +60,7 @@ namespace MyBlog.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(id))
+                if (!ArticleExists(id))
                 {
                     return NotFound();
                 }
@@ -71,37 +73,37 @@ namespace MyBlog.Controllers.API
             return NoContent();
         }
 
-        // POST: api/category
+        // POST: api/Article
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory([FromForm] Category category)
+        public async Task<ActionResult<Article>> PostArticle(Article article)
         {
-            _context.Categories.Add(category);
+            _context.Articles.Add(article);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            return CreatedAtAction("GetArticle", new { id = article.Id }, article);
         }
 
-        // DELETE: api/category/5
+        // DELETE: api/Article/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Category>> DeleteCategory(int id)
+        public async Task<ActionResult<Article>> DeleteArticle(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var article = await _context.Articles.FindAsync(id);
+            if (article == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
+            _context.Articles.Remove(article);
             await _context.SaveChangesAsync();
 
-            return category;
+            return article;
         }
 
-        private bool CategoryExists(int id)
+        private bool ArticleExists(int id)
         {
-            return _context.Categories.Any(e => e.Id == id);
+            return _context.Articles.Any(e => e.Id == id);
         }
     }
 }
