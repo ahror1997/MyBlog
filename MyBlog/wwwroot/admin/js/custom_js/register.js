@@ -88,7 +88,7 @@ $(document).ready(function () {
      Background slideshow
      */
     $('.bg-slider').backstretch([
-        "img/pages/bg-1.jpg", "img/pages/bg-2.jpg", "img/pages/bg-3.jpg", "img/pages/bg-4.jpg"
+        "https://localhost:44309/admin/img/pages/bg-1.jpg", "img/pages/bg-2.jpg", "img/pages/bg-3.jpg", "img/pages/bg-4.jpg"
     ], { duration: 2500, fade: 850 });
 
     $("#terms").on("ifChanged", function () {

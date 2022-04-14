@@ -12,7 +12,7 @@ $(document).ready(function() {
     /*Background slideshow */
 
     $('.bg-slider').backstretch([
-        "img/pages/lbg-1.jpg", "img/pages/lbg-2.jpg", "img/pages/lbg-3.jpg"
+        "https://localhost:44309/admin/img/pages/lbg-1.jpg", "img/pages/lbg-2.jpg", "img/pages/lbg-3.jpg"
     ], {
         duration: 2500,
         fade: 1050

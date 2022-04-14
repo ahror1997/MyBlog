@@ -30,8 +30,7 @@ namespace MyBlog
             // for relational apis
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // makes routes lowercase
             services.AddRouting(options => options.LowercaseUrls = true);
