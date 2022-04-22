@@ -49,8 +49,8 @@ namespace MyBlog.Controllers.Admin
         }
 
         [HttpPost]
-        [Route("[action]/{Id}")]
-        public IActionResult Edit(int Id, Article article)
+        [Route("[action]")]
+        public IActionResult Edit(Article article)
         {
             context.Articles.Update(article);
             context.SaveChanges();

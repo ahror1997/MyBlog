@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyBlog.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 
 namespace MyBlog
 {
@@ -22,8 +24,19 @@ namespace MyBlog
         {
             // database connection
             string mySqlConnectionStr = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContextPool<ApplicationContext>(options => options.UseMySql(mySqlConnectionStr,
-                ServerVersion.AutoDetect(mySqlConnectionStr)));
+            services.AddDbContextPool<ApplicationContext>(options => options.UseSqlServer(mySqlConnectionStr));
+
+            // use mysql
+            //services.AddDbContextPool<ApplicationContext>(options => options.UseMySql(mySqlConnectionStr,
+            //    ServerVersion.AutoDetect(mySqlConnectionStr)));
+
+            //identity
+            services.AddIdentity<MyUser, IdentityRole>(opts =>
+            {
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddControllersWithViews();
 
@@ -53,6 +66,8 @@ namespace MyBlog
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();    // подключение аутентификации
 
             app.UseAuthorization();
 
